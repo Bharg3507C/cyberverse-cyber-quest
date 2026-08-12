@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { IncidentScenario, InvestigationState, InvestigationPhase, SecurityLog, ScoreBreakdown, IncidentReport } from '@/lib/investigation/types';
 import { calculateScore, generateReport } from '@/lib/investigation/scoring';
+import { getTechniquesForScenario } from '@/lib/investigation/mitre';
 import CyberButton from '@/components/ui/CyberButton';
 
 interface InvestigationPanelProps {
@@ -483,10 +484,27 @@ function ReportPhase({ scenario, state, onClose }: { scenario: IncidentScenario;
           </div>
         </div>
         {/* Explanation */}
-        <div className="p-4 border border-white/5 rounded mb-6" style={{background:'rgba(0,240,255,0.02)'}}>
+        <div className="p-4 border border-white/5 rounded mb-4" style={{background:'rgba(0,240,255,0.02)'}}>
           <p className="text-[9px] tracking-[2px] text-cyan-400/60 mb-2">WHY THIS MATTERED</p>
           <p className="text-xs text-white/50 leading-relaxed">{scenario.explanation}</p>
         </div>
+        {/* MITRE ATT&CK */}
+        {(() => { const techniques = getTechniquesForScenario(scenario.id); return techniques.length > 0 ? (
+          <div className="p-4 border border-white/5 rounded mb-4" style={{background:'rgba(139,92,246,0.02)'}}>
+            <p className="text-[9px] tracking-[2px] text-purple-400/60 mb-2">MITRE ATT&CK TECHNIQUES DETECTED</p>
+            <div className="space-y-1.5">
+              {techniques.map(t => (
+                <div key={t.id} className="flex items-start gap-2">
+                  <span className="text-[9px] font-mono text-purple-400 shrink-0">{t.id}</span>
+                  <div>
+                    <span className="text-[10px] text-white/60">{t.name}</span>
+                    <span className="text-[9px] text-white/25 ml-2">({t.tactic})</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : null; })()}
         <div className="text-center">
           <CyberButton onClick={onClose}>RETURN TO CYBERVERSE</CyberButton>
         </div>

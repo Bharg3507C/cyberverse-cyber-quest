@@ -81,6 +81,7 @@ export default function WorldMapScene() {
               <bufferGeometry>
                 <bufferAttribute
                   attach="attributes-position"
+                  args={[new Float32Array([...start, mid[0], mid[1], mid[2], ...end]), 3]}
                   count={3}
                   array={new Float32Array([...start, mid[0], mid[1], mid[2], ...end])}
                   itemSize={3}

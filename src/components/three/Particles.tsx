@@ -54,6 +54,7 @@ export default function Particles({ count = 200, color = '#00f0ff', spread = 20,
       <bufferGeometry>
         <bufferAttribute
           attach="attributes-position"
+          args={[positions, 3]}
           count={count}
           array={positions}
           itemSize={3}

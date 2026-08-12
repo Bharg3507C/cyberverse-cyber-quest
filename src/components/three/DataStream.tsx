@@ -46,6 +46,7 @@ export default function DataStream({ start, end, color = '#00f0ff', speed = 1, p
       <bufferGeometry>
         <bufferAttribute
           attach="attributes-position"
+          args={[positions, 3]}
           count={particleCount}
           array={positions}
           itemSize={3}
