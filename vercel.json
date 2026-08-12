@@ -1,0 +1,5 @@
+{
+  "installCommand": "npx yarn@1 install",
+  "buildCommand": "npx next build",
+  "framework": "nextjs"
+}
