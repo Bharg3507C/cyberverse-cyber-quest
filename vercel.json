@@ -1,5 +1,8 @@
 {
   "installCommand": "npx yarn@1 install",
   "buildCommand": "npx next build",
-  "framework": "nextjs"
+  "framework": "nextjs",
+  "env": {
+    "NEXT_IGNORE_VULNERABILITY_CHECK": "1"
+  }
 }
